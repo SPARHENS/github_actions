@@ -1,6 +1,27 @@
 name: CI
 
-on: [push, pull_request]
+on: 
+  push:
+    branches:
+        - "**"
+
+  pull_request:
+    branches:
+        - "**"
+  
+  workflow_dispatch:
+    inputs:
+        log-level:
+            description: 'Log level'
+            required: true
+            default: 'INFO'
+            type: choice
+            options:
+                - DEBUG
+                - INFO
+                - WARNING
+                - ERROR
+                - CRITICAL
 
 permissions:
     contents: write
@@ -44,11 +65,11 @@ jobs:
 
            - name: list csv files
              run: |
-                ls -al ${{ github.workspace }}/GITHUB_ACTIONS/test/data/*.csv
+                ls -al ${{ github.workspace }}/test/data/*.csv
           
            - name: delete csv test data
              run: |
-                rm -rf ${{ github.workspace }}/GITHUB_ACTIONS/test/data/*.csv
+                rm -rf ${{ github.workspace }}/test/data/*.csv
            - name: upload artifact 2
              uses: actions/upload-artifact@v4
              with:
