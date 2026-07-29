@@ -88,4 +88,5 @@ jobs:
                 path: .
            - name: run tests
              run: |
+                python -m pytest --version
                 pytest --maxfail=1 -v
