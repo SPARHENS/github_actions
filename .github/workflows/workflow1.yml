@@ -38,6 +38,10 @@ jobs:
            - name: generate json test data
              run: |
                 python3 main.py
+
+           - name: list csv files
+             run: |
+                ls -al ${{ github.workspace }}/GITHUB_ACTIONS/test/data/*.csv
           
            - name: delete csv test data
              run: |
@@ -60,4 +64,4 @@ jobs:
                 path: .
            - name: run tests
              run: |
-                pytest 
+                pytest --maxfail=1 -v
